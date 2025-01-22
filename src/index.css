@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  @apply bg-white w-full h-screen overflow-x-hidden;
+  font-family: 'Satoshi', sans-serif;
+}
+
+.gradient {
+  background: linear-gradient(178.17deg, #04E2E2 1.78%, #00BBBB 98.69%);
+}
+
+.shadow {
+  box-shadow: 0px 0px 0.3px 0px #1AF0F0 inset;
+
+  box-shadow: 0px -4px 0.3px 0px #007979 inset;
+
+}
+
+
+.shadow2 {
+  box-shadow: 0px 0px 0.3px 0px #FFFF80 inset;
+
+  box-shadow: 0px -4px 0.3px 0px #666600 inset;
+
+}
+
+.grad {
+  background: linear-gradient(343.17deg, #FFFF00 -33.28%, #DEF91B -16.09%, #C8F52D -4.43%, #BDF336 1.41%, #AEF042 9.39%, #9EED4F 17.58%, #8CE95E 27.39%, #6AE37A 44.97%, #02CFCF 100%);
+}
