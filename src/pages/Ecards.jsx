@@ -1,16 +1,32 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
-const Ecard = ({ title, image, description }) => {
+const Ecard = ({ title, image, description, link }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(link);
+  };
+
   return (
-    <div className="p-4 bg-white rounded-lg shadow-lg">
-      <img src={image} alt={title} className="w-[100%] object-cover rounded" />
-      <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-      <div className="flex">
-      <p className="mt-2 text-sm text-gray-600">{description}</p>
-      <button className="mt-4 px-4 py-2 bg-gradient-to-r from-[#04e2e2] to-[#00bbbb] text-[#ffffff] border md:flex h border-b-4 border-[#04e2e2] font-semibold rounded-md cursor-pointer">
-      →
-      </button>
+    <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+      {/* Image Section */}
+      <img
+        src={image}
+        alt={title}
+        className="w-full h-48 object-cover rounded-t-2xl"
+      />
+
+      {/* Content Section */}
+      <div className="p-6">
+        <h3 className="text-xl font-semibold text-[#14142A] mb-2">{title}</h3>
+        <div className="flex justify-between items-center">
+          <p className="text-sm text-[#4E4B66]">{description}</p>
+          {/* Arrow Button */}
+          <button onClick={handleClick} className="flex items-center justify-center w-[54px] h-[44px] bg-gradient-to-r from-[#04e2e2] to-[#00bbbb] text-white rounded-[10px] font-medium hover:opacity-90 transition-opacity custom-shadow hover:shadow-none">
+            →
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -23,33 +23,34 @@ const App = () => {
     <div className="w-full h-screen overflow-x-hidden">
       <Routes> 
         {/* Public Routes */}
-        <Route path="/dashboard" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path='Education' element={<Education />} />
-          <Route path='LanguageGrid' element={<LanguageGrid />} />
-          <Route path='ProficiencyPage' element={<ProficiencyPage />} />
-          <Route path='DailyTarget' element={<DailyTarget />} />
-          <Route path='GreatStart' element={<GreatStart />} />
-          <Route path='StudyPlan' element={<StudyPlan />} />
-          <Route path='ChapterList' element={<ChapterList />} />
-          <Route path='DayStreakCard' element={<DayStreakCard />} />
-          <Route path='CoinBalance' element={<CoinBalance />} />
-          <Route path='SelectLanguage' element={<SelectLanguage />} />
-          <Route path='LearningCard' element={<LearningCard />} />
-          <Route path='ExpertGuidanceCard' element={<ExpertGuidanceCard />} />
-          <Route path='ListenCarefullyCard' element={<ListenCarefullyCard />} />
-          <Route path='DoneSentence' element={<DoneSentence />} />
-          <Route path='Brava' element={<Brava />} />
-
-        </Route>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/register/profile" element={<RegisterProfile />} />
         <Route path="/register/landing" element={<RegisterLanding />} />
         <Route path="/register/verify-email" element={<RegisterVerifyEmail />} />
         <Route path="/register/setup-account" element={<RegisterSetupAccount />} />
         <Route path="/register/take-photo" element={<TakePhoto />} />
+
+        {/* Dashboard Routes */}
+        <Route path="/dashboard" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="education" element={<Education />} />
+          <Route path="language-grid" element={<LanguageGrid />} />
+          <Route path="proficiency" element={<ProficiencyPage />} />
+          <Route path="daily-target" element={<DailyTarget />} />
+          <Route path="great-start" element={<GreatStart />} />
+          <Route path="study-plan" element={<StudyPlan />} />
+          <Route path="chapter-list" element={<ChapterList />} />
+          <Route path="day-streak" element={<DayStreakCard />} />
+          <Route path="coin-balance" element={<CoinBalance />} />
+          <Route path="select-language" element={<SelectLanguage />} />
+          <Route path="learning-card" element={<LearningCard />} />
+          <Route path="expert-guidance" element={<ExpertGuidanceCard />} />
+          <Route path="listen-carefully" element={<ListenCarefullyCard />} />
+          <Route path="done-sentence" element={<DoneSentence />} />
+          <Route path="brava" element={<Brava />} />
+        </Route>
       </Routes>
     </div>
   );

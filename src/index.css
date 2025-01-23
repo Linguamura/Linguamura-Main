@@ -18,7 +18,7 @@ body {
   background: linear-gradient(178.17deg, #04E2E2 1.78%, #00BBBB 98.69%);
 }
 
-.shadow {
+.custom-shadow {
   box-shadow: 0px 0px 0.3px 0px #1AF0F0 inset;
 
   box-shadow: 0px -4px 0.3px 0px #007979 inset;
@@ -35,4 +35,25 @@ body {
 
 .grad {
   background: linear-gradient(343.17deg, #FFFF00 -33.28%, #DEF91B -16.09%, #C8F52D -4.43%, #BDF336 1.41%, #AEF042 9.39%, #9EED4F 17.58%, #8CE95E 27.39%, #6AE37A 44.97%, #02CFCF 100%);
+}
+
+/* styles.css */
+.custom-shadow-normal {
+  box-shadow: 0px 0.59px 2.35px 0px #60617029; /* Normal shadow */
+}
+
+.custom-shadow-pressed {
+  box-shadow: 0px 0px 1.18px 0px #28293D14; /* Pressed shadow */
+}
+
+.circle-shadow {
+  box-shadow: 0px 0px 0.3px 0px #A0A3BD inset;
+  box-shadow: 0px -4px 0.3px 0px #A0A3BD inset;
+}
+
+.custom-shadow-2 {
+  box-shadow: 0px 0px 0.3px 0px #FFC000 inset;
+
+box-shadow: 0px -4px 0.3px 0px #997300 inset;
+
 }

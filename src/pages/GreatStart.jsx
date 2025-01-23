@@ -1,13 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const GreatStart = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
-      {/* Back Button */}
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 relative">
+      {/* Back Button (Aligned to the Left) */}
       <div className="absolute top-4 left-4">
-        <button className="flex items-center text-gray-600 hover:text-blue-600">
+        <button
+          onClick={() => navigate(-1)} // Go back to the previous page
+          className="flex items-center text-gray-600 hover:text-gray-800"
+        >
           <span>&larr;</span>
-          <span className="ml-2">Back</span>
         </button>
       </div>
 
@@ -26,16 +31,19 @@ const GreatStart = () => {
       </div>
 
       {/* Description */}
-      <p className="text-center text-gray-600 text-lg max-w-lg">
+      <p className="text-center text-[#4E4B66] text-[18px] font-normal max-w-lg">
         Learning French 30 mins/day will make you a great speaker in no time.
       </p>
 
       {/* Buttons */}
       <div className="mt-8 flex flex-col gap-4 w-full max-w-xs">
-        <button className="py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600">
+        <button
+          onClick={() => navigate("/dashboard/study-plan")} // Redirect to /dashboard/study-plan
+          className="py-3 gradient rounded-[55px] text-white custom-shadow hover:shadow-none shadow transition-colors"
+        >
           Start a Study Plan
         </button>
-        <button className="py-3 border border-gray-300 text-gray-600 rounded-lg hover:bg-gray-100">
+        <button className="py-3 custom-shadow hover:shadow-none rounded-[55px] border border-[#00BBBB] text-[#00BBBB] transition-colors">
           Not now
         </button>
       </div>
