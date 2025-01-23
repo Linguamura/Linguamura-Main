@@ -1,0 +1,52 @@
+export const lessons = [
+    {
+      id: "1",
+      type: "listen",
+      title: "Listen carefully",
+      subtitle: "Learn how to greet people in French",
+      image: "/images/woman1.jpeg",
+      audio: "/audio/bonjour.mp3",
+      french: "Bonjour",
+      english: "Good morning",
+      sentence: "Bonjour! Comment ça va? (Hello! How are you?)",
+      correctAnswer: "Bonjour",
+    },
+    {
+      id: "2",
+      type: "complete",
+      title: "Complete the Sentence",
+      subtitle: "Fill in the missing word",
+      image: "/images/homepage/man4.jpeg",
+      audio: "/audio/comment-ca-va.mp3",
+      french: "_____ Comment ça va?",
+      english: "Hello! How are you?",
+      options: ["Bonjour", "Bonsoir"],
+      correctAnswer: "Bonjour",
+    },
+    {
+      id: "3",
+      type: "pick",
+      title: "Pick the correct answer",
+      subtitle: "Choose the right greeting",
+      image: "/images/homepage/man4.jpeg",
+      audio: "/audio/bonjour.mp3",
+      french: "Bonjour",
+      english: "Good morning",
+      options: ["Bonjour", "Bonsoir", "Bon nuit", "Au revoir"],
+      correctAnswer: "Bonjour",
+    },
+    {
+      id: "4",
+      type: "match",
+      title: "Match the pairs",
+      subtitle: "Connect the French words with their English translations",
+      pairs: [
+        { french: "Bonjour", english: "Good morning" },
+        { french: "Au revoir", english: "Goodbye" },
+        { french: "Merci", english: "Thank you" },
+        { french: "S'il vous plaît", english: "Please" },
+      ],
+    },
+  ]
+  
+  
