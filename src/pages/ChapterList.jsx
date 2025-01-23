@@ -7,11 +7,11 @@ import {
   Target,
   Flame,
   ArrowRight,
-  CheckIcon,
 } from "lucide-react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { StreakModal } from "../components";
 
-// Data for chapters and lessons
 const chapters = [
   {
     title: "Chapter 1: Foundations",
@@ -88,11 +88,19 @@ const chapters = [
 ];
 
 export default function ChapterList() {
+  const navigate = useNavigate();
   const [showStreakModal, setShowStreakModal] = useState(false);
 
   // Toggle streak modal
   const toggleStreakModal = () => {
     setShowStreakModal(!showStreakModal);
+  };
+
+  // Handle lesson click
+  const handleLessonClick = (lesson) => {
+    if (!lesson.locked) {
+      navigate("/dashboard/select-language");
+    }
   };
 
   return (
@@ -134,8 +142,9 @@ export default function ChapterList() {
                   <div
                     key={lessonIndex}
                     className={`flex items-center gap-4 p-2 ${
-                      lesson.locked ? "opacity-50" : ""
+                      lesson.locked ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
                     }`}
+                    onClick={() => handleLessonClick(lesson)}
                   >
                     {/* Lesson Image */}
                     <div className="relative">
@@ -217,68 +226,7 @@ export default function ChapterList() {
       </div>
 
       {/* Streak Modal */}
-      {showStreakModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md">
-            {/* Modal Header */}
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-xl font-semibold text-[#14142A]">Day Streak</h2>
-              <button onClick={toggleStreakModal} className="text-gray-600">
-                ✕
-              </button>
-            </div>
-
-            {/* Streak Message */}
-            <p className="text-[#4E4B66] mb-6">
-              You’re doing great, Darlington!
-            </p>
-
-            {/* Streak Calendar */}
-            <div className="flex justify-between mb-6">
-              {["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"].map(
-                (day, index) => (
-                  <div key={index} className="flex flex-col items-center">
-                    <div className="w-8 h-8 flex items-center justify-center bg-[#00BFB3] rounded-full text-white">
-                      <CheckIcon className="w-4 h-4" />
-                    </div>
-                    <span className="text-sm text-[#4E4B66] mt-2">{day}</span>
-                  </div>
-                )
-              )}
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="bg-[#EFF0F6] p-4 rounded-lg">
-                <p className="text-sm text-[#4E4B66]">Days</p>
-                <p className="text-xl font-semibold text-[#14142A]">1</p>
-              </div>
-              <div className="bg-[#EFF0F6] p-4 rounded-lg">
-                <p className="text-sm text-[#4E4B66]">Lessons</p>
-                <p className="text-xl font-semibold text-[#14142A]">1</p>
-              </div>
-              <div className="bg-[#EFF0F6] p-4 rounded-lg">
-                <p className="text-sm text-[#4E4B66]">Quizzes</p>
-                <p className="text-xl font-semibold text-[#14142A]">3</p>
-              </div>
-              <div className="bg-[#EFF0F6] p-4 rounded-lg">
-                <p className="text-sm text-[#4E4B66]">Minutes</p>
-                <p className="text-xl font-semibold text-[#14142A]">36</p>
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="flex justify-between">
-              <button className="py-2 px-4 bg-[#00BFB3] text-white rounded-lg">
-                Take lesson
-              </button>
-              <button className="py-2 px-4 bg-white border border-[#00BFB3] text-[#00BFB3] rounded-lg">
-                Ask to edit
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {showStreakModal && <StreakModal onClose={toggleStreakModal} />}
     </div>
   );
 }
