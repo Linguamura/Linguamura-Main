@@ -3,6 +3,10 @@ import { X, PlayCircle } from "lucide-react"
 import AudioPlayer from "./AudioPlayer"
 import Toast from "./Toast"
 import MatchingPairs from "./MatchingPairs"
+import WordSelection from "./WordSelection"
+import LessonComplete from "./LessonComplete"
+import StreakModal from "./StreakModal"
+import { useNavigate } from "react-router-dom"
 
 const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
   const [toast, setToast] = useState({
@@ -10,6 +14,10 @@ const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
     isSuccess: false,
     message: "",
   })
+  const [currentStage, setCurrentStage] = useState("lesson") // 'lesson', 'words', 'complete', 'streak'
+  const [showComplete, setShowComplete] = useState(false)
+  const [showStreak, setShowStreak] = useState(false)
+  const navigate = useNavigate()
 
   const handleAnswer = (answer) => {
     const isCorrect = answer === lesson.correctAnswer
@@ -21,7 +29,7 @@ const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
 
     if (isCorrect) {
       setTimeout(() => {
-        onComplete()
+        setCurrentStage("words")
       }, 1500)
     }
   }
@@ -33,8 +41,31 @@ const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
       message: `Brava! Completed in ${attempts} attempts`,
     })
     setTimeout(() => {
-      onComplete()
+      setCurrentStage("words")
     }, 1500)
+  }
+
+  const handleWordSelectionComplete = (isCorrect) => {
+    setToast({
+      isVisible: true,
+      isSuccess: isCorrect,
+      message: isCorrect ? "Brava!" : "Not quite right",
+    })
+    if (isCorrect) {
+      setTimeout(() => {
+        setShowComplete(true)
+      }, 1500)
+    }
+  }
+
+  const handleContinue = () => {
+    setShowComplete(false)
+    setShowStreak(true)
+  }
+
+  const handleStreakClose = () => {
+    setShowStreak(false)
+    onComplete()
   }
 
   return (
@@ -45,18 +76,18 @@ const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
 
       {/* Progress Bar */}
       <div className="w-full max-w-[832px] h-[30px] flex items-center justify-center border-[0.56px] border-[#D9DBE9] p-2">
-      <div className="w-full h-[12px] bg-[#D9DBE9] rounded-[20.29px]">
-        <div
-          className="h-full gradient rounded-[20.29px] transition-all duration-300"
-          style={{ width: `${progress}%` }}
-        />
-      </div>
+        <div className="w-full h-[12px] bg-[#D9DBE9] rounded-[20.29px]">
+          <div
+            className="h-full gradient rounded-[20.29px] transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
       </div>
 
       <h1 className="text-[36px] font-bold text-[#14142A] mt-6">{lesson.title}</h1>
       <p className="text-[#4E4B66] text-[18px] mt-1">{lesson.subtitle}</p>
 
-      {lesson.type !== "match" && (
+      {currentStage === "lesson" && lesson.type !== "match" && (
         <>
           <div className="mt-6 w-[226px] rounded-[20px] h-[226px] relative">
             <img
@@ -65,9 +96,7 @@ const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
               className="rounded-[20px] h-full w-full object-cover"
             />
             {lesson.audio && (
-            <button
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white hover:text-[#00BFB3] transition-colors"
-              >
+              <button className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white hover:text-[#00BFB3] transition-colors">
                 <img src="/images/basil_play-solid.svg" alt="" className="" />
               </button>
             )}
@@ -88,9 +117,7 @@ const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
 
           {lesson.sentence && (
             <div className="mt-6 w-full max-w-[891px] h-[108px] bg-[#F7F7FC] p-4 rounded-lg">
-              <p className="text-[#4E4B66] text-sm">
-                Sentence Usage
-              </p>
+              <p className="text-[#4E4B66] text-sm">Sentence Usage</p>
               <p className="text-[#14142A] text-[24px]">{lesson.sentence}</p>
             </div>
           )}
@@ -126,6 +153,19 @@ const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
         </div>
       )}
 
+      {currentStage === "words" && (
+        <WordSelection
+          question="Do you have a cat?"
+          words={["Tu", "as", "un", "chat", "?"]}
+          correctOrder={["Tu", "as", "un", "chat", "?"]}
+          onComplete={handleWordSelectionComplete}
+        />
+      )}
+
+      {showComplete && <LessonComplete points={100} coins={10} onContinue={handleContinue} />}
+
+      {showStreak && <StreakModal streak={1} activeDays={["Mon"]} onClose={handleStreakClose} />}
+
       <Toast
         isVisible={toast.isVisible}
         isSuccess={toast.isSuccess}
@@ -137,3 +177,4 @@ const LessonCard = ({ lesson, onClose, onComplete, progress }) => {
 }
 
 export default LessonCard
+

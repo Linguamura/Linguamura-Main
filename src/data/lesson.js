@@ -47,6 +47,16 @@ export const lessons = [
         { french: "S'il vous plaît", english: "Please" },
       ],
     },
+    {
+        id: "5",
+        type: "words",
+        title: "Select the right words",
+        subtitle: "Complete the sentence",
+        question: "Do you have a cat?",
+        words: ["Tu", "as", "un", "chat", "?"],
+        correctOrder: ["Tu", "as", "un", "chat", "?"],
+      },
   ]
+  
   
   
